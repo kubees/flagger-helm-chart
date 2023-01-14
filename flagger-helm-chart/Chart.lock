@@ -1,0 +1,9 @@
+dependencies:
+- name: flagger
+  repository: https://flagger.app
+  version: 1.27.0
+- name: loadtester
+  repository: https://flagger.app
+  version: 0.28.0
+digest: sha256:8012bc7670e2c1a2efd3e581005e3e9ccb712211a1d36450016add5992fe89b5
+generated: "2023-01-14T13:50:07.177675+01:00"

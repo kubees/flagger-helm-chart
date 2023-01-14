@@ -1,0 +1,7 @@
+flagger:
+  crd:
+    create: false
+  meshProvider: "nginx"
+#  metricsServer: "http://prometheus-stack-kube-prom-prometheus.monitoring:9090"
+  prometheus:
+    install: true
