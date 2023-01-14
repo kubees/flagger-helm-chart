@@ -1,0 +1,42 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: videos-ms
+  namespace: microservices
+spec:
+  provider: nginx
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: videos-api
+  ingressRef:
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    name: microservices-ingress
+  progressDeadlineSeconds: 60
+  service:
+    port: 80
+    targetPort: 80
+  analysis:
+    interval: 10s
+    threshold: 10
+    maxWeight: 50
+    stepWeight: 5
+    metrics:
+      - name: request-success-rate
+        thresholdRange:
+          min: 99
+        interval: 1m
+    webhooks:
+      - name: acceptance-test
+        type: pre-rollout
+        url: http://flagger-loadtester.flagger/
+        timeout: 30s
+        metadata:
+          type: bash
+          cmd: "curl http://videos-api.microservices"
+      - name: load-test
+        url: http://flagger-loadtester.flagger/
+        timeout: 5s
+        metadata:
+          cmd: "hey -z 1m -q 10 -c 2 http://kubees.api.videos.com/"
