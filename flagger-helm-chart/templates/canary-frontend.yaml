@@ -20,8 +20,15 @@ spec:
   analysis:
     interval: 10s
     threshold: 10
-    maxWeight: 50
-    stepWeight: 5
+    match:
+      # curl -H 'X-Canary: insider' http://kubees.videos.app.com
+      - headers:
+          x-canary:
+            exact: "insider"
+      # curl -b 'canary=always' http://kubees.videos.app.com
+      - headers:
+          cookie:
+            exact: "canary"
     webhooks:
       - name: acceptance-test
         type: pre-rollout
