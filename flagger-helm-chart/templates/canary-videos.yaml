@@ -15,7 +15,7 @@ spec:
     name: microservices-ingress
   progressDeadlineSeconds: 60
   service:
-    port: 80
+    port: 10010
     targetPort: 10010
   analysis:
     interval: 10s
