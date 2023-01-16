@@ -16,7 +16,7 @@ spec:
   progressDeadlineSeconds: 60
   service:
     port: 80
-    targetPort: 80
+    targetPort: 10010
   analysis:
     interval: 10s
     threshold: 10
