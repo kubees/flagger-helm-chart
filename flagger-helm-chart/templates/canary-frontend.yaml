@@ -20,6 +20,7 @@ spec:
   analysis:
     interval: 10s
     threshold: 10
+    iterations: 10
     match:
       # curl -H 'X-Canary: insider' http://kubees.videos.app.com
       - headers:
